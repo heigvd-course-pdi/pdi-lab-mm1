@@ -7,7 +7,7 @@ ARRIVAL_RATE = 10.0  # Arrival rate (clients per second)
 SERVICE_RATE = 50.0  # Service rate (clients per second)
 SIM_DURATION = 10_000  # Duration of the simulation (seconds)
 
-def main(arrival_rate=ARRIVAL_RATE, service_duration=SERVICE_RATE, sim_duration=SIM_DURATION):
+def main(arrival_rate=ARRIVAL_RATE, service_rate=SERVICE_RATE, sim_duration=SIM_DURATION):
     """Run the M/M/1 queue simulation.
 
     The function takes the arrival rate, service duration, and simulation duration as parameters.
@@ -19,7 +19,7 @@ def main(arrival_rate=ARRIVAL_RATE, service_duration=SERVICE_RATE, sim_duration=
     server = simpy.Resource(env, capacity=1)
 
     # Create the M/M/1 queueing system
-    mm1_queue = simpy_mm1.SimpyQueue(env, server, arrival_rate, service_duration)
+    mm1_queue = simpy_mm1.SimpyQueue(env, server, arrival_rate, service_rate)
 
     # Start the request generator and the statistics recorder
     env.process(mm1_queue.generate_requests())
